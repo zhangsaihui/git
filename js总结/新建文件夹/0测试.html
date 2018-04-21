@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function a(){
+				alert('a');
+			}
+			function b(){
+				alert('b');
+			}
+			function c(){
+				alert('c');
+			}
+			/*document.addEventListener('click',a,false);
+			document.addEventListener('click',b,false);
+			document.addEventListener('click',c,false);*/
+		//标准浏览器事件绑定是写在前面的先执行   不需要on 直接click
+			document.attachEvent('onclick',a);
+			document.attachEvent('onclick',b);
+			document.attachEvent('onclick',c);
+		//ie8事件监听执行是写后面的先执行	需要on + click
+		</script>
+	</body>
+</html>

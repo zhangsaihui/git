@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>注册</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			p{
+				border: 1px solid #ccc;
+				position: relative;
+				height: 40px;
+				width: 200px;
+				line-height: 40px;
+				
+			}
+			input{
+				font-size: 12px;
+				/*height: 25px;*/
+				position: absolute;
+				top:13px;
+				left:70px;
+				width:125px;
+				/*border: 0;*/
+				outline: 0;
+				
+			}
+			button{
+				width:200px;
+				background:red;
+				text-align: center;
+				border: 0;
+			}
+			span{
+				position: absolute;
+				
+				left:85px;
+			    top:2px;
+				font-size: 10px;
+			}
+			i{
+				visibility: hidden;
+				font-style: normal;
+				font-size: 8px;
+			}
+		</style>
+	</head>
+	<body>
+		<form> <!--method="post" action=""-->
+			
+			<p><lable>　用户名:<input type="text" /><span>请输入用户名</span><lable></p><i>用户名由4-20个数字字母-_ 组成 </i><br />
+				
+			<p>	<lable>设置密码:<input type="password"/><span>建议至少使用两种字符</span><lable></p><i>adfa</i><br />
+				
+				<p><lable>确认密码:<input type="password" /><span>请再次输入密码</span><lable></p><i>adfa</i><br />
+				
+				<p><lable>手机号码:<input type="text"/><span>请输入手机号码</span><lable></p><i>adfa</i><br />
+				
+				<p><lable>电子邮箱:<input type="text" /><span>请输入电子邮箱</span><lable></p><i>adfa</i><br />
+				
+				<button>提交</button>
+		</form>
+		<script type="text/javascript">
+			var aInput=document.getElementsByTagName('input');
+			var aSpan=document.getElementsByTagName('span');
+			var aI=document.getElementsByTagName('i');
+			var aP=document.getElementsByTagName('p');
+		//spant点击时input获得焦点
+			for(var i=0;i<aSpan.length;i++){
+				aSpan[i].ind=i;
+				aSpan[i].onclick=function(){
+				aInput[this.ind].focus();
+				}
+			}
+		//input活得焦点时 i显示出来  span消失
+		    for(var j=0;j<aInput.length;j++){
+		    	aInput[j].index=j;
+		    	aInput[j].onfocus=function(){
+		    	aSpan[this.index].style.display="none";
+		    	aI[this.index].style.visibility='visible';
+		    	
+		    	}
+		    	/*aInput[j].onblur=function(){
+		    	    if(!this.value){
+		    	    	aSpan[this.index].style.display="block";
+		    	    }
+		    	}*/
+		    }
+		    //用户名由4-20个数字字母-_ 组成 ,不能输纯数字
+		    //用户名输入时不能有特殊字符 有就提示
+		    aInput[0].oninput=function(){
+		    	if(/[\,\@\!\#\^\.\/\ \+\*\%\+\(\)\]\[\""]/g.test(this.value)){
+		    		aI[0].innerHTML='格式不正确,用户名由4-20个汉字数字字母-_ 组成'
+		    		aI[0].style.color='red';
+		    		aP[0].style.borderColor='red';
+		    		this.style.textDecoration='underline'
+		    		this.style.color='red'
+		    	}else{
+		    		aI[0].innerHTML='用户名由4-20个汉字数字字母-_ 组成'
+		    		aI[0].style.color='#CCC';
+		    		aP[0].style.borderColor='#CCC';
+		    		this.style.textDecoration='none'
+		    		this.style.color='black'
+		    	}
+		    }
+		    //用户名失去焦点时
+		      //有特殊字符报错
+		      //没有输入 显示span
+		      //长度不够提示
+		      //纯数字提示不能是数字
+		    aInput[0].onblur=function(){
+		    	if(/[\,\@\!\#\^\.\/\ \+\*\%\;\$\(\)\]\[\""]/g.test(this.value)){
+		    		aI[0].innerHTML='格式不正确,用户名由4-20个汉字数字字母-_ 组成'
+		    		aI[0].style.color='red';
+		    		aP[0].style.borderColor='red';
+		    		this.style.textDecoration='underline'
+		    		this.style.color='red'
+		    	}else if(this.value.length==0){
+		    		aSpan[0].style.display="block";
+		    		aI[0].style.visibility='hidden';
+		    	}else if(this.value.length<=3||this.value.length>20){
+		    		aI[0].innerHTML='长度只能在4-20个字符之间'
+		    		aI[0].style.color='red';
+		    		aP[0].style.borderColor='red';
+		    	}else if(/^\d+$/.test(this.value)){
+		    		aI[0].innerHTML='不能全是数字'
+		    		aI[0].style.color='red';
+		    		aP[0].style.borderColor='red';
+		    	}else{
+		    		aI[0].innerHTML='√';
+		    		aI[0].style.color='green';
+		    	}
+		    }
+		 
+		</script>
+	</body>
+</html>

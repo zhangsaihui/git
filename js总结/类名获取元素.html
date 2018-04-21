@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function getClass(tagName,className) //获得标签名为tagName,类名className的元素
+{
+    if(document.getElementsByClassName) //支持这个函数
+    {        return document.getElementsByClassName(className);
+    }
+    else
+    {       var tags=document.getElementsByTagName(tagName);//获取标签
+        var tagArr=[];//用于返回类名为className的元素
+        for(var i=0;i < tags.length; i++)
+        {
+            if(tags[i].class == className)
+            {
+                tagArr[tagArr.length] = tags[i];//保存满足条件的元素
+            }
+        }
+        return tagArr;
+    }
+}
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			
+		一    获取元素的方法
+		    1 元素
+				 getElementById()
+				 getElementsByClassName()//类数组
+				 getElementsByName()//表单
+				 getElementsByTagName()//标签名
+			2 css	 
+				 document.querySelector()
+				 document.querySelectorAll(ul li)
+		二  创建元素/节点
+		         document.createElement()
+		         document.createTextNode()//文本节点
+		三 操作节点
+		         box.appendChild(node)//后面添加节点
+		         box.insertBefore(newnode,odnode)//前面添加节点
+		         box.removeChild(node)//移除子节点
+		         box.cloneNode(true)//克隆节点 包括字节点
+		         box.replaceChild(新节点,被替换的节点)//
+		四 节点的属性的操作
+		         box.getAttribute('属性名')
+		         box.setAttribute('属性名','属性值')
+		         box.removeAttribute('属性名')
+		五 获取节点的CSS属性
+		         标准浏览器
+		         getComputedStyle(box)['属性']
+		   Ie8及以下
+		         box.currentStyle['属性']
+		       兼容写法
+		         function getCss(obj,attr){
+		         	if(obj.currentStyle){
+		               obj.currentStyle[attr]
+		         		
+		         	}else{
+		               getComputedStyle(obj)[attr]
+		         		
+		         	}
+		         }
+		六 获取节点子元素
+		      box.children()
+		      box.childNodes()//包括空杯节点
+		七 节点的分类/属性
+		      box.nodeName  /获取的是大写
+		      box.nodeType   (元素1 属性2 文本3)
+		      box.nodeValue
+		      
+		八 节点的高级获取方法
+		     box.firstChild box.lastChild
+		     box.firstElementChild
+		     
+		     
+		九 获取元素的定位属性
+		
+		    offsetleft/offsettop是元素相对于他的定位父级元素的值
+		    
+		   
+		   	function getpostion(obj){
+				//存储最终的值
+				var _left=0;
+				var _top=0;
+				while(obj){//检测定位父级是否存在
+					_left+=obj.offsetLeft;
+					_top+=obj.offsetTop;
+					obj=obj.offsetParent;//获取当前元素的定位父级
+				}
+				return {//结果返回一个对象，两个值
+					left:_left,
+					top:_top
+				}
+			}
+			
+		
+		</script>
+	
+	   
+	</body>
+</html>

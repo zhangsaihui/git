@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function drag(obj) {
+				var shortx = 0;
+				var shorty = 0;
+				obj.onmousedown = function(ev) {
+					var ev = ev || window.event;
+					shortx = ev.offsetX;
+					shorty = ev.offsetY;
+					if(obj.setCapture) {
+						obj.setCapture();
+					}
+			
+					document.onmousemove = function(ev) {
+						var ev = ev || window.event;
+						var l = ev.clientX - shortx;
+						var t = ev.clientY - shorty;
+						if(l < 0) {
+							l = 0;
+						} else if(l > document.documentElement.clientWidth - obj.offsetWidth) {
+							l = document.documentElement.clientWidth - obj.offsetWidth;
+						}
+			
+						if(t < 0) {
+							t = 0;
+						} else if(t > document.documentElement.clientHeight - obj.offsetHeight) {
+							t = document.documentElement.clientHeight - obj.offsetHeight;
+						}
+			
+						obj.style.left = l + 'px';
+						obj.style.top = t + 'px';
+			
+					}
+					document.onmouseup = function() {
+						document.onmousemove = null;
+						document.onmouseup = null;
+						if(obj.setCapture) {
+							obj.releaseCapture();
+						}
+					}
+					return false; //阻止默认行为。
+					//ev.returnValue = false;
+				}
+	
+			}
+		</script>
+	</body>
+</html>

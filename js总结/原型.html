@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+/构造函数的继承
+		<script type="text/javascript">
+	  动物对象
+	        function asd (asd) {
+
+            }
+			function Animal() {
+              this.species = "动物";
+            }　
+            Animal.prototype.species = "动物";
+     
+     猫对象
+			function Cat(name, color) {
+              this.name = name;
+              this.color = color;
+           }
+			
+  让Cat继承Animal的属性species
+  
+        方法一:构造函数绑定
+          function Cat(name,color){
+		
+		　　　　Animal.apply(this, arguments);
+		
+		　　　　this.name = name;
+		
+		　　　　this.color = color;
+
+　　            }
+
+		　　var cat1 = new Cat("大毛","黄色");
+		
+		　　alert(cat1.species); // 动物
+		
+    方法二:prototype模式
+    
+		   Cat.prototype = new Animal();
+		
+		　　 Cat.prototype.constructor = Cat;
+		
+		　　var cat1 = new Cat("大毛","黄色");
+		
+		　　alert(cat1.species); // 动物
+		
+    方法三:利用空对象作为中介
+          
+	          　　var F = function(){};
+		
+		　　F.prototype = Animal.prototype;
+		
+		　　Cat.prototype = new F();
+		
+		　　Cat.prototype.constructor = Cat;
+		
+		这种方式是Cat.prototype =Animal.prototype的进化方式,避免了原型对象指向同一个对象,任何对
+		
+		子对象的原型对象(Cat.prototype)的更改都会映射到父对象的原型对象(Animal.prototype);
+		
+	方法四:拷贝继承
+	
+	     　　function extend2(Child, Parent) {
+
+	　　　　  var p = Parent.prototype;
+	
+	　　　　  var c = Child.prototype;
+	
+	　　　　  for (var i in p) {
+	
+	　　　　　　c[i] = p[i];
+	
+	　　　　　　}
+	
+	　　　　    c.uber = p;
+         //意思是为子对象设一个uber属性，这个属性直接指向父对象的prototype属性。（uber是一个德语词，意思是"向上"、"上一层"。）
+         //这等于在子对象上打开一条通道，可以直接调用父对象的方法。这一行放在这里，只是为了实现继承的完备性，纯属备用性质。
+　      　       }
+	     extend2(Cat,Animal))
+	 
+		</script>
+		<script type="text/javascript">
+			
+/非构造函数的继承
+		        　var Doctor ={
+		　　　　career:'医生'
+		　　  }
+		        　var Chinese = {
+　　　　                    nation:'中国';
+
+　　                       };
+让医生继承中国
+
+     方法一:object()方法
+		        　function object(o) {
+			
+			　　　　function F() {}
+			
+			　　　　F.prototype = o;
+			
+			　　　　return new F();
+			
+		　　}
+		    var Doctor=object(Chinese);
+		    alert(Doctor.nation); //中国
+		    
+   方法二:深拷贝
+             function deepCopy(p, c) {
+		
+			　　　　var c = c || {};
+			
+			　　　　for (let i in p) {
+			
+			　　　　　　if (typeof p[i] === 'object') {
+			
+			　　　　　　　　c[i] = (p[i].constructor === Array) ? [] : {};
+			
+			　　　　　　　　deepCopy(p[i], c[i]);
+			
+			　　　　　　} else {
+			
+			　　　　　　　　　c[i] = p[i];
+			
+			　　　　　　}
+			　　　　}
+			
+			　　　　return c;
+　　             }
+         var Doctor = deepCopy(Chinese);
+		</script>
+
+
+	</body>
+
+</html>
